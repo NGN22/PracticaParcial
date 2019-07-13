@@ -10,7 +10,7 @@ class Tecnico {
 	var List<CondicionSimple> condiciones = new ArrayList<CondicionSimple>()
 
 	def acepta(Vehiculo vehiculo) {
-		condiciones.forall[condicion|condicion.laCondicionEsAceptada(vehiculo)]
+		condiciones.forall[condicion|condicion.aceptaTrabajarCon(vehiculo)]
 	}
 
 	def asignar(Vehiculo vehiculo) {

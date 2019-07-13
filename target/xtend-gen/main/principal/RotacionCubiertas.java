@@ -11,6 +11,7 @@ public class RotacionCubiertas extends Mejora {
   
   @Override
   public float calcularCosto() {
-    return 200;
+    float _calcularCosto = super.calcularCosto();
+    return (_calcularCosto + 200);
   }
 }

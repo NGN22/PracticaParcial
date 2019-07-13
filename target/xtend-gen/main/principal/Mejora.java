@@ -12,7 +12,7 @@ public abstract class Mejora {
   public abstract void ejecutar();
   
   public float calcularCosto() {
-    return 0;
+    return this.vehiculo.costoBase();
   }
   
   @Pure

@@ -13,7 +13,7 @@ public class CondicionNombre extends CondicionSimple {
   }
   
   @Override
-  public boolean laCondicionEsAceptada(final Vehiculo nuevoVehiculo) {
+  public boolean aceptaTrabajarCon(final Vehiculo nuevoVehiculo) {
     String _nombreCliente = nuevoVehiculo.getNombreCliente();
     return (!Objects.equal(_nombreCliente, this.aceptado));
   }

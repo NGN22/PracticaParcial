@@ -19,7 +19,9 @@ public class ReparacionCubiertas extends Mejora {
   
   @Override
   public float calcularCosto() {
+    float _calcularCosto = super.calcularCosto();
     int _size = this.cubiertas.size();
-    return (_size * 200);
+    int _multiply = (_size * 200);
+    return (_calcularCosto + _multiply);
   }
 }

@@ -15,7 +15,7 @@ public class Tecnico {
   
   public boolean acepta(final Vehiculo vehiculo) {
     final Function1<CondicionSimple, Boolean> _function = (CondicionSimple condicion) -> {
-      return Boolean.valueOf(condicion.laCondicionEsAceptada(vehiculo));
+      return Boolean.valueOf(condicion.aceptaTrabajarCon(vehiculo));
     };
     return IterableExtensions.<CondicionSimple>forall(this.condiciones, _function);
   }

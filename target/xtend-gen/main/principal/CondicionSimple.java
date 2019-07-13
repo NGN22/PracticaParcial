@@ -4,7 +4,7 @@ import Vehiculo.Vehiculo;
 
 @SuppressWarnings("all")
 public class CondicionSimple {
-  public boolean laCondicionEsAceptada(final Vehiculo vehiculo) {
+  public boolean aceptaTrabajarCon(final Vehiculo vehiculo) {
     return true;
   }
 }

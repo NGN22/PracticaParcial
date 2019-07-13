@@ -6,17 +6,21 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class MarcaModelo {
-  private float costoBaseCubierta;
+  private float costo;
   
   private float costoBaseSuspension;
   
-  @Pure
-  public float getCostoBaseCubierta() {
-    return this.costoBaseCubierta;
+  public float costo() {
+    return this.costo;
   }
   
-  public void setCostoBaseCubierta(final float costoBaseCubierta) {
-    this.costoBaseCubierta = costoBaseCubierta;
+  @Pure
+  public float getCosto() {
+    return this.costo;
+  }
+  
+  public void setCosto(final float costo) {
+    this.costo = costo;
   }
   
   @Pure

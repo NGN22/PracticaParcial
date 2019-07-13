@@ -14,7 +14,9 @@ public class SuspensionReparacion extends Mejora {
   
   @Override
   public float calcularCosto() {
+    float _calcularCosto = super.calcularCosto();
     float _costoBaseSuspension = this.getVehiculo().getMarcaYmodelo().getCostoBaseSuspension();
-    return (_costoBaseSuspension * 2);
+    float _multiply = (_costoBaseSuspension * 2);
+    return (_calcularCosto + _multiply);
   }
 }

@@ -14,7 +14,7 @@ public class CondicionMarca extends CondicionSimple {
   }
   
   @Override
-  public boolean laCondicionEsAceptada(final Vehiculo nuevoVehiculo) {
+  public boolean aceptaTrabajarCon(final Vehiculo nuevoVehiculo) {
     MarcaModelo _marcaYmodelo = nuevoVehiculo.getMarcaYmodelo();
     return Objects.equal(_marcaYmodelo, this.aceptado);
   }

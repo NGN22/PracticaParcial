@@ -12,9 +12,9 @@ public class CondicionCompuestaExcluyente extends CondicionSimple {
   private List<CondicionSimple> condiciones = new ArrayList<CondicionSimple>();
   
   @Override
-  public boolean laCondicionEsAceptada(final Vehiculo nuevoVehiculo) {
+  public boolean aceptaTrabajarCon(final Vehiculo nuevoVehiculo) {
     final Function1<CondicionSimple, Boolean> _function = (CondicionSimple condicion) -> {
-      return Boolean.valueOf(condicion.laCondicionEsAceptada(nuevoVehiculo));
+      return Boolean.valueOf(condicion.aceptaTrabajarCon(nuevoVehiculo));
     };
     return IterableExtensions.<CondicionSimple>forall(this.condiciones, _function);
   }

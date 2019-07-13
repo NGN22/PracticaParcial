@@ -14,7 +14,7 @@ abstract class Mejora {
 
 	def void ejecutar()
 
-	def float calcularCosto() { 0 }
+	def float calcularCosto() { vehiculo.costoBase() }
 
 }
 
@@ -27,7 +27,7 @@ class ReparacionCubiertas extends Mejora {
 	}
 
 	override calcularCosto() {
-		cubiertas.size * 200
+		super.calcularCosto +  cubiertas.size * 200
 	}
 }
 
@@ -38,7 +38,7 @@ class RotacionCubiertas extends Mejora {
 	}
 
 	override calcularCosto() {
-		200
+		super.calcularCosto + 200
 	}
 
 }
@@ -51,7 +51,7 @@ class SuspensionReparacion extends Mejora {
 	}
 
 	override calcularCosto() {
-		( vehiculo.marcaYmodelo.costoBaseSuspension * 2 )
+		super.calcularCosto + ( vehiculo.marcaYmodelo.costoBaseSuspension * 2 )
 	}
 }
 
@@ -59,7 +59,8 @@ class lavado extends Mejora {
 
 	override ejecutar() {
 	}
-
+	
+	
 }
 
 class RegulacionMotor extends Mejora {

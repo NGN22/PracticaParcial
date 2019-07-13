@@ -54,6 +54,11 @@ class Vehiculo {
 	def asignarServicio(Tecnico tecnico, List<Mejora> mejoraspendiantes ){
 		
 	}
+	
+	def costoBase() {
+		marcaYmodelo.costo()
+	}
+	
 }
 
 

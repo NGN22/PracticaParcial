@@ -66,6 +66,10 @@ public class Vehiculo {
     return null;
   }
   
+  public float costoBase() {
+    return this.marcaYmodelo.costo();
+  }
+  
   @Pure
   public Servicio getServicio() {
     return this.servicio;
