@@ -69,13 +69,12 @@ class SuspensionReparacion extends Mejora {
 	}
 }
 
-class Lavado extends Mejora {
+class LavadoAuto extends Mejora {
 
 	new ( Vehiculo auto ){
 		vehiculo = auto
 	}
 	
-
 }
 
 class RegulacionMotor extends Mejora {

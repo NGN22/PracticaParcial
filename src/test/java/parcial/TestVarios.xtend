@@ -2,17 +2,17 @@ package parcial
 
 import org.junit.Assert
 import org.junit.Test
-import principal.Lavado
 import principal.RegulacionMotor
 import principal.RotacionCubiertas
 import principal.SuspensionReparacion
+import principal.LavadoAuto
 
 class TestVarios extends Datos {
 	
 	
 	@Test
 	def testCostoLavadoservicio(){
-		var Lavado lavado = new Lavado(auto)
+		var LavadoAuto lavado = new LavadoAuto(auto)
 		mejorasPendientes.add(lavado)
 		Assert.assertEquals( servicio.calcularCosto , 100,0 )
 	}
@@ -25,14 +25,15 @@ class TestVarios extends Datos {
 	
 	@Test
 	def void testCostolavadomasauto(){
-		var Lavado lavado = new Lavado(auto)
+		var LavadoAuto lavado = new LavadoAuto(auto)
 		mejorasPendientes.add(lavado)
+		
 		Assert.assertEquals( auto.costoTotal , 100,0 )
 	}
 	
 	@Test
 	def testCostolavadomaRotacionsauto100mas300(){
-		var Lavado lavado = new Lavado(auto) // 100
+		var LavadoAuto lavado = new LavadoAuto(auto) // 100
 		var RotacionCubiertas rotacion = new RotacionCubiertas(auto) //100 + 200
 		mejorasPendientes.add(lavado)
 		mejorasPendientes.add(rotacion)

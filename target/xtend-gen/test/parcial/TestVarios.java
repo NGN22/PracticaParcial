@@ -4,7 +4,7 @@ import Vehiculo.Vehiculo;
 import org.junit.Assert;
 import org.junit.Test;
 import parcial.Datos;
-import principal.Lavado;
+import principal.LavadoAuto;
 import principal.RegulacionMotor;
 import principal.RotacionCubiertas;
 import principal.SuspensionReparacion;
@@ -14,7 +14,7 @@ public class TestVarios extends Datos {
   @Test
   public void testCostoLavadoservicio() {
     Vehiculo _auto = this.getAuto();
-    Lavado lavado = new Lavado(_auto);
+    LavadoAuto lavado = new LavadoAuto(_auto);
     this.getMejorasPendientes().add(lavado);
     Assert.assertEquals(this.getServicio().calcularCosto(), 100, 0);
   }
@@ -27,7 +27,7 @@ public class TestVarios extends Datos {
   @Test
   public void testCostolavadomasauto() {
     Vehiculo _auto = this.getAuto();
-    Lavado lavado = new Lavado(_auto);
+    LavadoAuto lavado = new LavadoAuto(_auto);
     this.getMejorasPendientes().add(lavado);
     Assert.assertEquals(this.getAuto().costoTotal(), 100, 0);
   }
@@ -35,7 +35,7 @@ public class TestVarios extends Datos {
   @Test
   public void testCostolavadomaRotacionsauto100mas300() {
     Vehiculo _auto = this.getAuto();
-    Lavado lavado = new Lavado(_auto);
+    LavadoAuto lavado = new LavadoAuto(_auto);
     Vehiculo _auto_1 = this.getAuto();
     RotacionCubiertas rotacion = new RotacionCubiertas(_auto_1);
     this.getMejorasPendientes().add(lavado);
