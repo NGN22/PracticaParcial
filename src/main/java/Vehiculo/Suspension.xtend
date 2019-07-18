@@ -4,10 +4,13 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
 class Suspension {
-	float medida
+	float desgaste
 
+	new (float nuevo){
+		desgaste = nuevo
+	}
 	def reparar() {
-		medida = 0
+		desgaste = 0
 	}
 
 }

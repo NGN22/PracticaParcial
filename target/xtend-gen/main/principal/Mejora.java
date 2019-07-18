@@ -6,12 +6,13 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
-public abstract class Mejora {
+public class Mejora {
   private Vehiculo vehiculo;
   
-  public abstract void ejecutar();
+  public void ejecutar() {
+  }
   
-  public float calcularCosto() {
+  public double calcularCosto() {
     return this.vehiculo.costoBase();
   }
   

@@ -5,16 +5,28 @@ import org.eclipse.xtend.lib.annotations.Accessors
 @Accessors
 class Motor {
 
-	var ControladorVerdadero controladorVerdadero
+	var ControladorVerdadero controladorVerdadero = new ControladorVerdadero
+	var boolean estado
 
-	def estado() {
+	new() {
+		estado = getStatus()
+	}
+	
+	def arreglarMotor(){
+		ajustarRpm
+		regularBujias
+	}
+	
+	def getStatus() {
 		controladorVerdadero.comoEstaElMotor()
 	}
-	
-	def reguladorBujias(){
-		
+
+	def ajustarRpm() {
+		controladorVerdadero.ajustarRpm()
 	}
-	
-	
-	
+
+	def regularBujias(){
+		controladorVerdadero.regularBujias()
+	}
+
 }

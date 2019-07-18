@@ -1,10 +1,11 @@
 package principal;
 
+import Vehiculo.Vehiculo;
 import principal.Mejora;
 
 @SuppressWarnings("all")
-public class lavado extends Mejora {
-  @Override
-  public void ejecutar() {
+public class Lavado extends Mejora {
+  public Lavado(final Vehiculo auto) {
+    this.setVehiculo(auto);
   }
 }

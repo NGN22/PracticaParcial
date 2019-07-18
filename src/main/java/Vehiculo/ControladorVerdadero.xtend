@@ -1,49 +1,58 @@
 package Vehiculo
 
 class ControladorVerdadero implements Controlador {
-	
-	
-	def regularBujias(){
-		arreglarBujias()
+
+	def regularBujias() {
+		#[1..getSparkPlugsLength].forEach[ iterado | fixSparkPlug(iterado.step) ]
 	}
+
 	
-	def arreglarBujias() {
-	
-		}
-	
-	def comoEstaElMotor(){
+	def comoEstaElMotor() {
 		comprobacion
 	}
-	
-	def comprobacion(){
+
+	def comprobacion() {
 		status == 0
 	}
-	
-	def void ajustarRpm(){
-		if (getRpm != 200){
-			verificarMotor(1  )
+
+	def void ajustarRpm() {
+		if (!estadoRpm) {
+			verRpm()
 		}
 	}
 	
-	
-	
-	
-	def verificarMotor(int variable){
-		
-		val bloque = [ int numero | setRpm( numero ) ]
-		//bloque.apply()
+	def estadoRpm(){
+		getRpm == 1000
 	}
+
+	def verRpm(){
+		if( !estadoRpm ) { verificarMotor }  
+	}
+
+	def void verificarMotor() {
+		if( condicionMotor ) { disminuir } else aumentar
+	}
+
+	def boolean condicionMotor(){
+		getRpm > 1000 
+	}
+
 	
 	def disminuir() {
-		-1
+		mandarRpm(-1)
+		verRpm()
+	}
+
+	def aumentar() {
+		mandarRpm(1)
+		verRpm()
+	}
+
+	def mandarRpm(int numero){
+		setRpm(numero*10)
 	}
 	
-	def aumentar(){
-		1
-	}
 	
-	
-	
-	
-	
+
+
 }

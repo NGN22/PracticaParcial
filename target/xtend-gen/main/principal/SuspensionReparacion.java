@@ -1,22 +1,25 @@
 package principal;
 
-import Vehiculo.Suspension;
+import Vehiculo.Vehiculo;
 import principal.Mejora;
 
 @SuppressWarnings("all")
 public class SuspensionReparacion extends Mejora {
-  private Suspension suspensionInvolucrada;
+  private String suspensionInvolucrada = " ";
   
-  @Override
-  public void ejecutar() {
-    this.suspensionInvolucrada.reparar();
+  public SuspensionReparacion(final String suspensionNueva, final Vehiculo auto) {
+    this.setVehiculo(auto);
+    this.suspensionInvolucrada = suspensionNueva;
   }
   
   @Override
-  public float calcularCosto() {
-    float _calcularCosto = super.calcularCosto();
-    float _costoBaseSuspension = this.getVehiculo().getMarcaYmodelo().getCostoBaseSuspension();
-    float _multiply = (_costoBaseSuspension * 2);
-    return (_calcularCosto + _multiply);
+  public void ejecutar() {
+    this.getVehiculo().repararSuspension(this.suspensionInvolucrada);
+  }
+  
+  @Override
+  public double calcularCosto() {
+    double _calcularCosto = super.calcularCosto();
+    return (_calcularCosto * 2);
   }
 }

@@ -6,18 +6,22 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class Suspension {
-  private float medida;
+  private float desgaste;
+  
+  public Suspension(final float nuevo) {
+    this.desgaste = nuevo;
+  }
   
   public float reparar() {
-    return this.medida = 0;
+    return this.desgaste = 0;
   }
   
   @Pure
-  public float getMedida() {
-    return this.medida;
+  public float getDesgaste() {
+    return this.desgaste;
   }
   
-  public void setMedida(final float medida) {
-    this.medida = medida;
+  public void setDesgaste(final float desgaste) {
+    this.desgaste = desgaste;
   }
 }

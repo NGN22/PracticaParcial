@@ -1,23 +1,24 @@
 package Vehiculo;
 
+import Vehiculo.Dibujo;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
 public class Cubierta {
-  private int desgaste;
+  private Dibujo dibujo;
   
-  public int reparar() {
-    return this.desgaste;
+  public Object reparar() {
+    return null;
   }
   
   @Pure
-  public int getDesgaste() {
-    return this.desgaste;
+  public Dibujo getDibujo() {
+    return this.dibujo;
   }
   
-  public void setDesgaste(final int desgaste) {
-    this.desgaste = desgaste;
+  public void setDibujo(final Dibujo dibujo) {
+    this.dibujo = dibujo;
   }
 }

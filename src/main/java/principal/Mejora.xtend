@@ -1,38 +1,47 @@
 package principal
 
-import Vehiculo.Cubierta
 import Vehiculo.Vehiculo
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
-import java.time.LocalDate
-import Vehiculo.Suspension
 
 @Accessors
-abstract class Mejora {
+class Mejora {
 
-	Vehiculo vehiculo
+	var Vehiculo vehiculo 
+	
+	def void ejecutar(){}
 
-	def void ejecutar()
-
-	def float calcularCosto() { vehiculo.costoBase() }
+	def double calcularCosto() { vehiculo.costoBase }
 
 }
 
 class ReparacionCubiertas extends Mejora {
 
-	List<Cubierta> cubiertas
+	List<String> cubiertasAReparar
+
+	new(List<String> listaCubiertasMejorar, Vehiculo auto ) {
+		vehiculo = auto
+		cubiertasAReparar = listaCubiertasMejorar
+	}
 
 	override ejecutar() {
-		cubiertas.forEach[cubierta|cubierta.reparar]
+		cubiertasAReparar.forEach[elemento|reparar(elemento)]
+	}
+
+	def reparar(String key) {
+		vehiculo.repararCubierta(key)
 	}
 
 	override calcularCosto() {
-		super.calcularCosto +  cubiertas.size * 200
+		super.calcularCosto + cubiertasAReparar.size() * 200
 	}
 }
 
 class RotacionCubiertas extends Mejora {
 
+	new (Vehiculo auto ){
+		vehiculo = auto
+	}
 	override ejecutar() {
 		vehiculo.rotarCubiertas()
 	}
@@ -44,31 +53,60 @@ class RotacionCubiertas extends Mejora {
 }
 
 class SuspensionReparacion extends Mejora {
-	Suspension suspensionInvolucrada
+	String suspensionInvolucrada = " "
+
+	new(String suspensionNueva, Vehiculo auto ) {
+		vehiculo = auto
+		suspensionInvolucrada = suspensionNueva
+	}
 
 	override ejecutar() {
-		suspensionInvolucrada.reparar()
+		vehiculo.repararSuspension(suspensionInvolucrada)
 	}
 
 	override calcularCosto() {
-		super.calcularCosto + ( vehiculo.marcaYmodelo.costoBaseSuspension * 2 )
+		super.calcularCosto * 2
 	}
 }
 
-class lavado extends Mejora {
+class Lavado extends Mejora {
 
-	override ejecutar() {
+	new ( Vehiculo auto ){
+		vehiculo = auto
 	}
 	
-	
+
 }
 
 class RegulacionMotor extends Mejora {
 
-	int tiempo = 0
-	boolean desmonte = false
+	int tiempo
+	boolean desmonte
+
+	new(int demora, boolean validacionDesmonte, Vehiculo auto) {
+		tiempo = demora
+		desmonte = validacionDesmonte
+		vehiculo = auto
+	}
 
 	override ejecutar() {
+		vehiculo.regulacionMotor()
+	}
+
+	override calcularCosto() {
+		super.calcularCosto + sumarAdicionales()
+	}
+
+	def sumarAdicionales() {
+		adicionalDesmonte() + adicionalTiempo()
+	}
+
+	def adicionalTiempo() {
+		if(desmonte) 1000 else 0
+	}
+
+	def adicionalDesmonte() {
+		if(tiempo > 20) 1500 else 0
 	}
 
 }

@@ -1,16 +1,20 @@
 package Vehiculo;
 
 import Vehiculo.Controlador;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import java.util.Collections;
+import java.util.function.Consumer;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.IntegerRange;
 
 @SuppressWarnings("all")
 public class ControladorVerdadero implements Controlador {
-  public Object regularBujias() {
-    return this.arreglarBujias();
-  }
-  
-  public Object arreglarBujias() {
-    return null;
+  public void regularBujias() {
+    int _sparkPlugsLength = this.getSparkPlugsLength();
+    IntegerRange _upTo = new IntegerRange(1, _sparkPlugsLength);
+    final Consumer<IntegerRange> _function = (IntegerRange iterado) -> {
+      this.fixSparkPlug(iterado.getStep());
+    };
+    Collections.<IntegerRange>unmodifiableList(CollectionLiterals.<IntegerRange>newArrayList(_upTo)).forEach(_function);
   }
   
   public boolean comoEstaElMotor() {
@@ -23,25 +27,51 @@ public class ControladorVerdadero implements Controlador {
   }
   
   public void ajustarRpm() {
-    int _rpm = this.getRpm();
-    boolean _notEquals = (_rpm != 200);
-    if (_notEquals) {
-      this.verificarMotor(1);
+    boolean _estadoRpm = this.estadoRpm();
+    boolean _not = (!_estadoRpm);
+    if (_not) {
+      this.verRpm();
     }
   }
   
-  public void verificarMotor(final int variable) {
-    final Procedure1<Integer> _function = (Integer numero) -> {
-      this.setRpm(numero);
-    };
-    final Procedure1<Integer> bloque = _function;
+  public boolean estadoRpm() {
+    int _rpm = this.getRpm();
+    return (_rpm == 1000);
   }
   
-  public int disminuir() {
-    return (-1);
+  public void verRpm() {
+    boolean _estadoRpm = this.estadoRpm();
+    boolean _not = (!_estadoRpm);
+    if (_not) {
+      this.verificarMotor();
+    }
   }
   
-  public int aumentar() {
-    return 1;
+  public void verificarMotor() {
+    boolean _condicionMotor = this.condicionMotor();
+    if (_condicionMotor) {
+      this.disminuir();
+    } else {
+      this.aumentar();
+    }
+  }
+  
+  public boolean condicionMotor() {
+    int _rpm = this.getRpm();
+    return (_rpm > 1000);
+  }
+  
+  public void disminuir() {
+    this.mandarRpm((-1));
+    this.verRpm();
+  }
+  
+  public void aumentar() {
+    this.mandarRpm(1);
+    this.verRpm();
+  }
+  
+  public void mandarRpm(final int numero) {
+    this.setRpm((numero * 10));
   }
 }

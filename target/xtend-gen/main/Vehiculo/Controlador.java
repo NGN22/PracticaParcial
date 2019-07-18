@@ -3,7 +3,7 @@ package Vehiculo;
 @SuppressWarnings("all")
 public interface Controlador {
   public default int getRpm() {
-    return 0;
+    return this.getRpm();
   }
   
   public default void setRpm(final int i) {
@@ -12,7 +12,7 @@ public interface Controlador {
   public default void fixSparkPlug(final int i) {
   }
   
-  public default int getSparkPlug() {
+  public default int getSparkPlugsLength() {
     return 0;
   }
   

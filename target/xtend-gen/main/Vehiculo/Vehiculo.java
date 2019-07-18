@@ -5,19 +5,17 @@ import Vehiculo.Cubierta;
 import Vehiculo.MarcaModelo;
 import Vehiculo.Motor;
 import Vehiculo.Suspension;
-import java.util.List;
+import java.util.Map;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
-import principal.Mejora;
 import principal.Servicio;
-import principal.Tecnico;
 
 @Accessors
 @SuppressWarnings("all")
 public class Vehiculo {
   private Servicio servicio;
   
-  private final String patente;
+  private String patente;
   
   private Cliente cliente;
   
@@ -25,24 +23,23 @@ public class Vehiculo {
   
   private MarcaModelo marcaYmodelo;
   
-  private Motor estado;
+  private Motor motor;
   
-  private Suspension suspension;
+  private Map<String, Suspension> suspension;
   
-  private Cubierta delanteraDerecha;
+  private Map<String, Cubierta> cubiertas;
   
-  private Cubierta delanteraizquierda;
-  
-  private Cubierta traseraDerecha;
-  
-  private Cubierta traseraizquierda;
-  
-  public Vehiculo(final String patenteNueva, final Cliente clienteNuevo, final float kilometrajeInicial, final MarcaModelo marcaModeloNuevo, final Motor estado, final Suspension suspensionNueva, final Cubierta delanteraderechaNueva, final Cubierta delanteraizquierdaNueva, final Cubierta traseraDerecha, final Cubierta traseraizquierda) {
+  public Vehiculo(final String patenteNueva, final Cliente clienteNuevo, final float kilometrajeInicial, final MarcaModelo marcaModeloNuevo, final Motor estado, final Map<String, Cubierta> cubiertasNuevas, final Map<String, Suspension> suspensionNueva) {
     this.patente = patenteNueva;
     this.cliente = clienteNuevo;
     this.kilometraje = kilometrajeInicial;
     this.marcaYmodelo = marcaModeloNuevo;
+    this.motor = estado;
     this.suspension = suspensionNueva;
+    this.cubiertas = cubiertasNuevas;
+  }
+  
+  public Vehiculo() {
   }
   
   public String getNombreCliente() {
@@ -52,22 +49,46 @@ public class Vehiculo {
   public Cubierta rotarCubiertas() {
     Cubierta _xblockexpression = null;
     {
-      Cubierta cambio = this.delanteraDerecha;
-      this.delanteraDerecha = this.traseraDerecha;
-      this.traseraDerecha = cambio;
-      cambio = this.delanteraizquierda;
-      this.delanteraizquierda = this.traseraizquierda;
-      _xblockexpression = this.traseraizquierda = cambio;
+      Cubierta temporal = this.cubiertas.get("derechaDelantera");
+      this.cubiertas.replace("derechaDelantera", this.cubiertas.get("derechaTrasera"));
+      this.cubiertas.replace("derechaTrasera", temporal);
+      temporal = this.cubiertas.get("izquierdaDelantera");
+      this.cubiertas.replace("izquierdaDelantera", this.cubiertas.get("izquierdaTrasera"));
+      _xblockexpression = this.cubiertas.replace("izquierdaTrasera", temporal);
     }
     return _xblockexpression;
   }
   
-  public Object asignarServicio(final Tecnico tecnico, final List<Mejora> mejoraspendiantes) {
-    return null;
+  public Servicio asignarServicio(final Servicio nuevo) {
+    return this.servicio = nuevo;
   }
   
-  public float costoBase() {
-    return this.marcaYmodelo.costo();
+  public void arreglar() {
+    this.servicio.ejecutar();
+  }
+  
+  public double costoBase() {
+    return this.marcaYmodelo.getCosto();
+  }
+  
+  public double costoTotal() {
+    return this.servicio.calcularCosto();
+  }
+  
+  public Object repararCubierta(final String llave) {
+    return this.cubiertas.get(llave).reparar();
+  }
+  
+  public float repararSuspension(final String string) {
+    return this.suspension.get(string).reparar();
+  }
+  
+  public void regulacionMotor() {
+    this.motor.arreglarMotor();
+  }
+  
+  public boolean getStatus() {
+    return this.motor.getStatus();
   }
   
   @Pure
@@ -82,6 +103,10 @@ public class Vehiculo {
   @Pure
   public String getPatente() {
     return this.patente;
+  }
+  
+  public void setPatente(final String patente) {
+    this.patente = patente;
   }
   
   @Pure
@@ -112,56 +137,29 @@ public class Vehiculo {
   }
   
   @Pure
-  public Motor getEstado() {
-    return this.estado;
+  public Motor getMotor() {
+    return this.motor;
   }
   
-  public void setEstado(final Motor estado) {
-    this.estado = estado;
+  public void setMotor(final Motor motor) {
+    this.motor = motor;
   }
   
   @Pure
-  public Suspension getSuspension() {
+  public Map<String, Suspension> getSuspension() {
     return this.suspension;
   }
   
-  public void setSuspension(final Suspension suspension) {
+  public void setSuspension(final Map<String, Suspension> suspension) {
     this.suspension = suspension;
   }
   
   @Pure
-  public Cubierta getDelanteraDerecha() {
-    return this.delanteraDerecha;
+  public Map<String, Cubierta> getCubiertas() {
+    return this.cubiertas;
   }
   
-  public void setDelanteraDerecha(final Cubierta delanteraDerecha) {
-    this.delanteraDerecha = delanteraDerecha;
-  }
-  
-  @Pure
-  public Cubierta getDelanteraizquierda() {
-    return this.delanteraizquierda;
-  }
-  
-  public void setDelanteraizquierda(final Cubierta delanteraizquierda) {
-    this.delanteraizquierda = delanteraizquierda;
-  }
-  
-  @Pure
-  public Cubierta getTraseraDerecha() {
-    return this.traseraDerecha;
-  }
-  
-  public void setTraseraDerecha(final Cubierta traseraDerecha) {
-    this.traseraDerecha = traseraDerecha;
-  }
-  
-  @Pure
-  public Cubierta getTraseraizquierda() {
-    return this.traseraizquierda;
-  }
-  
-  public void setTraseraizquierda(final Cubierta traseraizquierda) {
-    this.traseraizquierda = traseraizquierda;
+  public void setCubiertas(final Map<String, Cubierta> cubiertas) {
+    this.cubiertas = cubiertas;
   }
 }
